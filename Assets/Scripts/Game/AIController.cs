@@ -15,7 +15,32 @@
         if (result5.HasValue) return result5.Value;
         return null;
     }
+    public static (int row, int col)? GetBestMove(GameManager.PlayerType[,] board)
+    {
+        float bestScore = -1000f;
+        (int row, int col)? bestMove = null;
+        
+        for (var row = 0; row < board.GetLength(0); row++)
+        {
+            for (var col = 0; col < board.GetLength(1); col++)
+            {
+                if (board[row, col] == GameManager.PlayerType.None)
+                {
+                    board[row, col] = GameManager.PlayerType.PlayerB;
+                    var score = DoMinimax(board, 0, false);
+                    board[row, col] = GameManager.PlayerType.None;
 
+                    if (score > bestScore)
+                    {
+                        bestScore = score;
+                        bestMove = (row, col);
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
     private static (int row, int col)? FindEmptyPosition(GameManager.PlayerType[,] board,
         GameManager.PlayerType playerType)
     {
