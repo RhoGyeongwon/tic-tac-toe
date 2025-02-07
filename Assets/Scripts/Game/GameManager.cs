@@ -118,7 +118,8 @@ public class GameManager : Singleton<GameManager>
             _blockController.PlaceMarker(Block.MarkerType.O, row, col);
             return true;
         }
-        else if (playerType == PlayerType.PlayerB)
+        
+        if (playerType == PlayerType.PlayerB)
         {
             _board[row, col] = playerType;
             _blockController.PlaceMarker(Block.MarkerType.X, row, col);
@@ -143,10 +144,6 @@ public class GameManager : Singleton<GameManager>
                         else
                             EndGame(gameResult);
                     }
-                    else
-                    {
-                        // TODO: 이미 있는 곳을 터치했을 때 처리
-                    }
                 };
                 
                 break;
@@ -164,16 +161,11 @@ public class GameManager : Singleton<GameManager>
                         else
                             EndGame(gameResult);
                     }
-                    else
-                    {
-                        // TODO: 이미 있는 곳을 터치했을 때 처리
-                    }
                 }
                 else
                 {
                     EndGame(GameResult.Win);
                 }
-                
                 
                 break;
         }
